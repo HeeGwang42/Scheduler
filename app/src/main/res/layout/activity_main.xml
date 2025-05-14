@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/editSubject"
@@ -14,8 +11,7 @@
         android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:hint="과목명 입력"
-        />
+        android:hint="과목명" />
 
     <EditText
         android:id="@+id/editTime"
@@ -23,27 +19,43 @@
         android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:hint="요일/시간 입력"
-        />
+        android:hint="요일 및 시간" />
 
-    <Button
-        android:id="@+id/buttonAdd"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="추가"
-        />
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="추가"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="삭제"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        >
+        android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/textViewResult"
+        <LinearLayout
+            android:id="@+id/scheduleLayout"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="수업 목록:\n"
-            />
+            android:layout_height="wrap_content">
+            <!-- 체크박스가 추가될 레이아웃 -->
+        </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

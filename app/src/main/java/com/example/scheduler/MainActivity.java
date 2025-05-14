@@ -10,36 +10,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editSubject;
-    EditText editTime;
-    Button buttonAdd;
-    TextView textViewResult;
-    String resultText = "수업 목록:\n";
+    EditText edit_Subject;
+    EditText edit_Time;
+    Button Add_button;
+    TextView textView_Result;
+    String result_Text = "수업 목록:\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editSubject = findViewById(R.id.editSubject);
-        editTime = findViewById(R.id.editTime);
-        buttonAdd = findViewById(R.id.buttonAdd);
-        textViewResult = findViewById(R.id.textViewResult);
+        edit_Subject = findViewById(R.id.editSubject);
+        edit_Time = findViewById(R.id.editTime);
+        Add_button = findViewById(R.id.buttonAdd);
+        textView_Result = findViewById(R.id.textViewResult);
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        Add_button.setOnClickListener(new View.OnClickListener() {  //추가 버튼을 눌렀을 때 이벤트를 처리
             @Override
             public void onClick(View view) {
-                String subject = editSubject.getText().toString().trim();
-                String time = editTime.getText().toString().trim();
+                String subject = edit_Subject.getText().toString().trim();
+                String time = edit_Time.getText().toString().trim();
 
                 if (!subject.isEmpty() && !time.isEmpty()) {
-                    resultText += "- " + subject + " / " + time + "\n";
-                    textViewResult.setText(resultText);
-                    editSubject.setText("");
-                    editTime.setText("");
-                } else {
-                    Toast.makeText(MainActivity.this, "과목명과 시간을 모두 입력하세요.", Toast.LENGTH_SHORT).show();
-                }
+                    result_Text += "- " + subject + " / " + time + "\n";
+                    textView_Result.setText(result_Text);
+                    edit_Subject.setText("");
+                    edit_Time.setText("");
+                } else Toast.makeText(MainActivity.this, "과목명과 시간을 모두 입력하세요.", Toast.LENGTH_SHORT).show();
             }
         });
     }

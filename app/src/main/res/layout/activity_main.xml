@@ -12,6 +12,8 @@
         android:id="@+id/editSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         android:hint="과목명 입력"
         />
 
@@ -19,6 +21,8 @@
         android:id="@+id/editTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         android:hint="요일/시간 입력"
         />
 
@@ -26,7 +30,7 @@
         android:id="@+id/buttonAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="수업 추가"
+        android:text="추가"
         />
 
     <ScrollView

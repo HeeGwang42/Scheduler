@@ -15,12 +15,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edit_Subject, edit_Time, edit_detail;
+    EditText edit_Subject, edit_Time, edit_detail; //과목, 시간, 상세정보
     Button add_button, del_button, det_button; //추가버튼, 삭제버튼, 상세보기 버튼
-    LinearLayout schedule_layout;
+    LinearLayout schedule_layout; //체크박스를 추가할 레이아웃
 
-    ArrayList<CheckBox> checkBoxList = new ArrayList<>(); // 체크박스를 저장하는 리스트
-    ArrayList<String> detailList = new ArrayList<>(); // 각 항목의 상세정보를 저장
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +45,14 @@ public class MainActivity extends AppCompatActivity {
                 // CheckBox 생성
                 CheckBox checkBox = new CheckBox(this);
                 checkBox.setText(text);
+                checkBox.setTag(detail); // 상세정보 저장
                 schedule_layout.addView(checkBox);
-                checkBoxList.add(checkBox);
-                detailList.add(detail); // 상세정보 저장
 
                 // 입력란 초기화
                 edit_Subject.setText("");
                 edit_Time.setText("");
                 edit_detail.setText("");
-            } else {
-                Toast.makeText(this, "빈칸을 모두 입력하세요.", Toast.LENGTH_SHORT).show();
-            }
+            } else Toast.makeText(this, "빈칸을 모두 입력하세요.", Toast.LENGTH_SHORT).show();
         });
 
         // [삭제] 버튼을 클릭시 생성되는 이벤트 처리
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 // 삭제할 요소를 모아두는 리스트 생성
                 List<View> removeList = new ArrayList<>();
 
-                // 모든 자식 뷰를 확인하여 체크된 항목 수집
+                // 모든 자식 뷰를 확인하여 체크박스를 확인 후 식별
                 for (int i = 0; i < schedule_layout.getChildCount(); i++) {
                     View child = schedule_layout.getChildAt(i);
                     if (child instanceof CheckBox) {
@@ -85,21 +80,23 @@ public class MainActivity extends AppCompatActivity {
         det_button.setOnClickListener(v -> {
             StringBuilder info = new StringBuilder(); //append로 문자열을 추가하는 string + 클래스
 
-            //체크된 체크박스를 식별
-            for (int i = 0; i < checkBoxList.size(); i++) {
-                CheckBox checkBox = checkBoxList.get(i);
-                if (checkBox.isChecked()) {
-                    info.append(checkBox.getText().toString()).append(" : ");
-                    info.append(detailList.get(i)).append("\n");
+            //모든 자식 뷰를 확인하여 체크박스를 확인 후 식별
+            for (int i = 0; i < schedule_layout.getChildCount(); i++) {
+                View child = schedule_layout.getChildAt(i);
+                if (child instanceof CheckBox) {
+                    CheckBox checkBox = (CheckBox) child;
+                    if (checkBox.isChecked()) {
+                        String detail = (String) checkBox.getTag();
+                        info.append(checkBox.getText().toString()).append(" : ");
+                        info.append(detail).append("\n");
+                    }
                 }
             }
 
             //추가된 info가 있는지 확인 (체크된 체크박스가 없을시 else)
-            if (info.length() > 0) {
-                Toast.makeText(MainActivity.this, info.toString().trim(), Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(MainActivity.this, "선택된 수업이 없습니다.", Toast.LENGTH_SHORT).show();
-            }
+            if (info.length() > 0) Toast.makeText(MainActivity.this, info.toString().trim(), Toast.LENGTH_LONG).show();
+            else Toast.makeText(MainActivity.this, "선택된 수업이 없습니다.", Toast.LENGTH_SHORT).show();
+
         });
     }
 }

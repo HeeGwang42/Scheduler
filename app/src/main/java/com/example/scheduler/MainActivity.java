@@ -15,7 +15,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edit_Subject, edit_Time, edit_detail; //과목, 시간, 상세정보
+    EditText edit_Subject, edit_StartTime, edit_EndTime, edit_detail, edit_Day; //과목, 시간, 상세정보
+
     Button add_button, del_button, det_button; //추가버튼, 삭제버튼, 상세보기 버튼
     LinearLayout schedule_layout; //체크박스를 추가할 레이아웃
 
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         edit_Subject = findViewById(R.id.editSubject);
-        edit_Time = findViewById(R.id.editTime);
+        edit_StartTime = findViewById(R.id.editStartTime);
+        edit_EndTime = findViewById(R.id.editEndTime);
+        edit_Day = findViewById(R.id.editDay);
         edit_detail = findViewById(R.id.editDetail);
         add_button = findViewById(R.id.buttonAdd);
         del_button = findViewById(R.id.buttonDelete);
@@ -36,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
         // [추가] 버튼을 클릭시 생성되는 이벤트 처리
         add_button.setOnClickListener(v -> {
             String subject = edit_Subject.getText().toString().trim();
-            String time = edit_Time.getText().toString().trim();
+            String startTime = edit_StartTime.getText().toString().trim();
+            String endTime = edit_EndTime.getText().toString().trim();
+            String day = edit_Day.getText().toString().trim();
             String detail = edit_detail.getText().toString().trim();
 
-            if (!subject.isEmpty() && !time.isEmpty() && !detail.isEmpty()) {
-                String text = subject + " / " + time;
+            if (!subject.isEmpty() && !day.isEmpty() && !startTime.isEmpty() && !endTime.isEmpty() && !detail.isEmpty()) {
+                String text = day + "/" + subject +  "\n" + startTime + " ~ " + endTime;
 
                 // CheckBox 생성
                 CheckBox checkBox = new CheckBox(this);
@@ -50,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
                 // 입력란 초기화
                 edit_Subject.setText("");
-                edit_Time.setText("");
+                edit_Day.setText("");
+                edit_StartTime.setText("");
+                edit_EndTime.setText("");
                 edit_detail.setText("");
             } else Toast.makeText(this, "빈칸을 모두 입력하세요.", Toast.LENGTH_SHORT).show();
         });

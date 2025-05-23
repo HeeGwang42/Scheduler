@@ -1,106 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".MainActivity">
 
-    <EditText
-        android:background="@drawable/edit_text_background"
-        android:id="@+id/editSubject"
+    <!-- 캘린더 뷰 -->
+    <CalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="과목명"
-        android:minWidth="48dp"
-        android:minHeight="40dp" />
+        android:layout_marginBottom="16dp" />
 
-    <EditText
-        android:background="@drawable/edit_text_background"
-        android:id="@+id/editDay"
+    <!-- 새 일정 만들기 버튼 -->
+    <Button
+        android:id="@+id/createScheduleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="요일"
-        android:minWidth="48dp"
-        android:minHeight="40dp" />
-
-    <EditText
-        android:background="@drawable/edit_text_background"
-        android:id="@+id/editStartTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="시작 시간"
-        android:minWidth="48dp"
-        android:minHeight="40dp" />
-
-    <EditText
-        android:background="@drawable/edit_text_background"
-        android:id="@+id/editEndTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="종료 시간"
-        android:minWidth="48dp"
-        android:minHeight="40dp" />
-
-    <EditText
-        android:background="@drawable/edit_text_background"
-        android:id="@+id/editDetail"
-        android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:hint="상세정보"
-        android:minWidth="48dp"
-        android:minHeight="40dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/buttonAdd"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="추가"
-            android:textColor="#333333"
-            android:background="@drawable/white_button"
-            android:layout_marginEnd="6dp"/>
-
-        <Button
-            android:id="@+id/buttonDelete"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="삭제"
-            android:textColor="#333333"
-            android:background="@drawable/white_button"
-            android:layout_marginEnd="6dp"/>
-
-        <Button
-            android:id="@+id/buttonDetail"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="상세보기"
-            android:textColor="#333333"
-            android:background="@drawable/white_button"
-            android:layout_marginEnd="6dp"/>
-    </LinearLayout>
+        android:text="새 일정 만들기" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
         <LinearLayout
-            android:id="@+id/scheduleLayout"
+            android:id="@+id/scheduleListLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- 체크박스가 추가될 레이아웃 -->
-        </LinearLayout>
+            android:orientation="vertical"
+            android:padding="8dp" />
     </ScrollView>
 
 </LinearLayout>

@@ -1,52 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/scheduleLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Monday\n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layoutMonday"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Tuesday\n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layoutTuesday"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Wednesday\n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layoutWednesday"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Thursday\n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layoutThursday"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Friday\n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layoutFriday"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Saturday\n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layoutSaturday"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Sunday\n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layoutSunday"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
     <EditText
-        android:background="@drawable/edit_text_background"
         android:id="@+id/editSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="과목명"
+        android:background="@drawable/edit_text_background"
         android:minWidth="48dp"
         android:minHeight="40dp" />
 
-    <EditText
-        android:background="@drawable/edit_text_background"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="요일 선택"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
         android:id="@+id/editDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="요일"
-        android:minWidth="48dp"
-        android:minHeight="40dp" />
+        android:entries="@array/days_array"
+        android:backgroundTint="#FF9800" />
+
 
     <EditText
-        android:background="@drawable/edit_text_background"
         android:id="@+id/editStartTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="시작 시간"
+        android:focusable="false"
+        android:clickable="true"
+        android:background="@drawable/edit_text_background"
         android:minWidth="48dp"
         android:minHeight="40dp" />
 
     <EditText
-        android:background="@drawable/edit_text_background"
         android:id="@+id/editEndTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="종료 시간"
+        android:focusable="false"
+        android:clickable="true"
+        android:background="@drawable/edit_text_background"
         android:minWidth="48dp"
         android:minHeight="40dp" />
 
     <EditText
-        android:background="@drawable/edit_text_background"
         android:id="@+id/editDetail"
         android:layout_width="match_parent"
         android:layout_height="91dp"
         android:hint="상세정보"
+        android:background="@drawable/edit_text_background"
         android:minWidth="48dp"
         android:minHeight="40dp" />
 
@@ -65,7 +161,7 @@
             android:text="추가"
             android:textColor="#333333"
             android:background="@drawable/white_button"
-            android:layout_marginEnd="6dp"/>
+            android:layout_marginEnd="6dp" />
 
         <Button
             android:id="@+id/buttonDelete"
@@ -75,7 +171,7 @@
             android:text="삭제"
             android:textColor="#333333"
             android:background="@drawable/white_button"
-            android:layout_marginEnd="6dp"/>
+            android:layout_marginEnd="6dp" />
 
         <Button
             android:id="@+id/buttonDetail"
@@ -84,16 +180,16 @@
             android:layout_weight="1"
             android:text="상세보기"
             android:textColor="#333333"
-            android:background="@drawable/white_button"
-            android:layout_marginEnd="6dp"/>
-
+            android:background="@drawable/white_button" />
     </LinearLayout>
 
+    <!-- 저장 및 일정 삭제 버튼 -->
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="저장" />
+        android:text="저장"
+        android:layout_marginTop="12dp" />
 
     <Button
         android:id="@+id/buttonDeleteSchedule"
@@ -102,21 +198,6 @@
         android:text="일정 삭제"
         android:textColor="#FFFFFF"
         android:backgroundTint="#B00020"
-        android:layout_marginTop="8dp"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:id="@+id/scheduleLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- 체크박스가 추가될 레이아웃 -->
-        </LinearLayout>
-    </ScrollView>
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>

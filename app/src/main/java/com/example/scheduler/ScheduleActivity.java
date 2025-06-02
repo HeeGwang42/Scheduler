@@ -97,7 +97,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
             boolean saved = false;
 
-            // ✅ 직접 입력해서 저장하는 경우
+            // 직접 입력해서 저장하는 경우
             if (!subject.isEmpty() && !day.isEmpty() && !startTime.isEmpty() && !endTime.isEmpty()) {
                 if (editIndex != -1) {
                     ScheduleStorage.update(this, dateMillis, editIndex, subject, day, startTime, endTime, detail);
@@ -106,25 +106,33 @@ public class ScheduleActivity extends AppCompatActivity {
                 }
                 saved = true;
             } else {
-                // ✅ 체크박스를 통한 저장 (여러 개 지원)
-                for (int i = 0; i < schedule_layout.getChildCount(); i++) {
-                    View child = schedule_layout.getChildAt(i);
-                    if (child instanceof CheckBox && ((CheckBox) child).isChecked()) {
-                        CheckBox cb = (CheckBox) child;
-                        String[] lines = cb.getText().toString().split("\n");
-                        if (lines.length >= 2) {
-                            String[] top = lines[0].split("/");
-                            String[] times = lines[1].split("~");
 
-                            if (top.length >= 2 && times.length >= 2) {
-                                String cbDay = top[0].trim();
-                                String cbSubject = top[1].trim();
-                                String cbStart = times[0].trim();
-                                String cbEnd = times[1].trim();
-                                String cbDetail = cb.getTag() != null ? cb.getTag().toString() : "";
+                // 체크박스를 통한 저장 (여러 개 지원)
+                LinearLayout[] allLayouts = {
+                        layoutMonday, layoutTuesday, layoutWednesday,
+                        layoutThursday, layoutFriday, layoutSaturday, layoutSunday
+                };
 
-                                ScheduleStorage.save(this, dateMillis, cbSubject, cbDay, cbStart, cbEnd, cbDetail);
-                                saved = true;
+                for (LinearLayout layout : allLayouts) {
+                    for (int i = 0; i < layout.getChildCount(); i++) {
+                        View child = layout.getChildAt(i);
+                        if (child instanceof CheckBox && ((CheckBox) child).isChecked()) {
+                            CheckBox cb = (CheckBox) child;
+                            String[] lines = cb.getText().toString().split("\n");
+                            if (lines.length >= 2) {
+                                String[] top = lines[0].split("/");
+                                String[] times = lines[1].split("~");
+
+                                if (top.length >= 2 && times.length >= 2) {
+                                    String cbDay = top[0].trim();
+                                    String cbSubject = top[1].trim();
+                                    String cbStart = times[0].trim();
+                                    String cbEnd = times[1].trim();
+                                    String cbDetail = cb.getTag() != null ? cb.getTag().toString() : "";
+
+                                    ScheduleStorage.save(this, dateMillis, cbSubject, cbDay, cbStart, cbEnd, cbDetail);
+                                    saved = true;
+                                }
                             }
                         }
                     }
@@ -135,9 +143,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 Toast.makeText(this, "일정이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 finish();
-            } else {
-                Toast.makeText(this, "빈칸을 모두 입력하거나 체크박스를 선택하세요.", Toast.LENGTH_SHORT).show();
-            }
+            } else Toast.makeText(this, "빈칸을 모두 입력하거나 체크박스를 선택하세요.", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -153,7 +159,7 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         });
 
-        // ✅ [추가] 버튼 기능
+        // [추가] 버튼
         add_button.setOnClickListener(v -> {
             String subject = edit_Subject.getText().toString().trim();
             String day = edit_Day.getSelectedItem().toString();
@@ -166,7 +172,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 return;
             }
 
-            //입력한 선택한 요일을 리턴해줄 getLayoutByDay함수
+            //입력한 선택한 요일을 리턴해줄 getLayoutByDay 사용자 정의 함수
             LinearLayout targetLayout = getLayoutByDay(day);
 
             if (targetLayout != null) {
@@ -185,7 +191,7 @@ public class ScheduleActivity extends AppCompatActivity {
             edit_detail.setText("");
         });
 
-        // ✅ [삭제] 버튼 기능 (체크된 것만 삭제)
+        // [삭제] 버튼 기능 (체크된 것만 삭제)
         del_button.setOnClickListener(v -> {
             deleteCheckedItems(layoutMonday);
             deleteCheckedItems(layoutTuesday);
@@ -196,7 +202,7 @@ public class ScheduleActivity extends AppCompatActivity {
             deleteCheckedItems(layoutSunday);
         });
 
-        // ✅ [상세보기] 버튼 기능
+        // [상세보기] 버튼 기능
         det_button.setOnClickListener(v -> {
             StringBuilder info = new StringBuilder();
 
